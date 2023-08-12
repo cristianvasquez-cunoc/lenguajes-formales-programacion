@@ -14,4 +14,8 @@ public class Token {
         this.column = column;
     }
 
+    public String toString() {
+        return "Token, type: " + type.getValue() + ", lexeme: \"" + lexeme + "\", line: " + line + ", column: "
+                + column;
+    }
 }

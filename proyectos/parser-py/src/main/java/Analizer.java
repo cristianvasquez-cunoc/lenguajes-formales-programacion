@@ -24,10 +24,13 @@ public class Analizer {
             acc.accumulate(characters.dequeue());
 
             // verify if token it's completed and if so, create it
-            if (validator.isToken(currentChar)) {
-                Token newTk = tkGenerator.generateToken(validator, acc);
-                acc.empty();
-                System.out.println("h");
+            if (validator.isPossibleToken(currentChar)) {
+                Token newTk = tkGenerator.generateToken(validator, acc, currentChar.getNext());
+
+                if (newTk != null) {// means that it's a valid token
+                    acc.empty();
+                    System.out.println(newTk.toString());
+                }
             }
 
             // update tkGeneratorPointer

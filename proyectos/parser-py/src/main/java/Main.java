@@ -16,7 +16,7 @@ class Main {
 
         Analizer analizer = new Analizer();
 
-        String stringToAnalize = "def\nreturn\tas.for";
+        String stringToAnalize = "++====and,not,or,or not==+//+//=";
 
         analizer.start(stringToAnalize);
 
