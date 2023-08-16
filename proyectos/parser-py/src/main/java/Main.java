@@ -16,7 +16,7 @@ class Main {
 
         Analizer analizer = new Analizer();
 
-        String stringToAnalize = "++====and,not,or,or not==+//+//=";
+        String stringToAnalize = "rapeme\"hola\"23453-\"hell\"";
 
         analizer.start(stringToAnalize);
 

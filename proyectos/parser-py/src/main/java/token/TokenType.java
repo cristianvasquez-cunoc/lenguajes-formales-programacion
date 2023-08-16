@@ -1,7 +1,7 @@
 package token;
 
 public enum TokenType {
-    RESERVED_WORD("reserved word"),
+    KEY_WORD("key word"),
     IDENTIFIER("identifier"),
     ARITHMETIC_OP("arithmetic operator"),
     COMPARISION_OP("comparission operator"),

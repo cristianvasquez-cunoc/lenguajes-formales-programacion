@@ -45,8 +45,37 @@ public class Validator {
         return includes(currentString, ASSIGNMENT_OP);
     }
 
-    public boolean isReservedWord(String currentString) {
+    public boolean isKeyWord(String currentString) {
         return includes(currentString, RESERVED_WORDS);
+    }
+
+    public boolean isConstant(String currentString) {
+
+        return (isString(currentString) || isNumber(currentString) || isDouble(currentString));
+
+    }
+
+    public boolean isString(String currentString) {
+        return (currentString.length() > 1 && currentString.charAt(0) == '"'
+                && currentString.charAt(currentString.length() - 1) == '"');
+    }
+
+    public boolean isDouble(String currentString) {
+        try {
+            Double.valueOf(currentString);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public boolean isNumber(String currentString) {
+        try {
+            Integer.valueOf(currentString);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     public boolean isPossibleToken(Node<Character> currentChar) {

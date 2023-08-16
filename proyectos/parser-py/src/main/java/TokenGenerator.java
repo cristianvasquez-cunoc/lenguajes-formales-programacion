@@ -7,6 +7,8 @@ public class TokenGenerator {
     int columnRead;
     TokenType tokenTypeRead;
 
+    boolean isGeneratingString = false;
+
     public TokenGenerator() {
         this.lineRead = 0;
         this.columnRead = 0;
@@ -24,13 +26,28 @@ public class TokenGenerator {
         tokenTypeRead = null;
         String currentStrg = accumulator.getString();
 
-        if (currentStrg.equals(' ')) {
+        // ignore spaces
+        if (currentStrg.equals(" ")) {
             accumulator.empty();
             return null;
-        } // ignore spaces
+        }
 
-        if (validator.isReservedWord(currentStrg)) {
-            tokenTypeRead = TokenType.RESERVED_WORD;
+        // handle constants strings
+        if (currentStrg.equals("\""))
+            isGeneratingString = true;
+
+        if (isGeneratingString && !validator.isString(currentStrg)) {
+            return null;
+        } else if (isGeneratingString) {
+            isGeneratingString = false;
+            return new Token(TokenType.CONSTANT, accumulator.getString(), lineRead, columnRead);
+        }
+
+        if (nextChar.equals('\"') && isGeneratingString)
+            return null;
+
+        if (validator.isKeyWord(currentStrg)) {
+            tokenTypeRead = TokenType.KEY_WORD;
         } else if (validator.isArithmeticOperator(currentStrg)) {
 
             if (nextChar.equals('=')) // means token will be assignment_op on next loop
@@ -40,7 +57,11 @@ public class TokenGenerator {
 
             tokenTypeRead = TokenType.ARITHMETIC_OP;
         } else if (validator.isComparissionOperator(currentStrg)) {
-            tokenTypeRead = TokenType.ARITHMETIC_OP;
+
+            if ((currentStrg.equals(">") || currentStrg.equals("<")) && nextChar.equals('='))
+                return null;// it's gonna be comparission with "="
+
+            tokenTypeRead = TokenType.COMPARISION_OP;
         } else if (validator.isAssignmentOperator(currentStrg)) {
 
             if (nextChar.equals('=') && currentStrg.equals("=")) // means it's gonna be == comparission op
@@ -49,7 +70,21 @@ public class TokenGenerator {
             tokenTypeRead = TokenType.ASSIGNMENT_OP;
         } else if (validator.isLogicOperator(currentStrg)) {
             tokenTypeRead = TokenType.LOGIC_OP;
+        } else if (validator.isConstant(currentStrg)) {
+
+            if (nextChar.equals('.') && validator.isNumber(currentStrg)) // it could be double
+                return null;
+
+            if (validator.isDouble(currentStrg) && validator.isNumber(String.valueOf(nextChar)))
+                return null;
+
+            tokenTypeRead = TokenType.CONSTANT;
+
         } else {
+
+            if (currentStrg.equals("!") && nextChar.equals('='))// it's gonna be assignment !=
+                return null;
+
             tokenTypeRead = TokenType.ERROR;
         }
         ;
