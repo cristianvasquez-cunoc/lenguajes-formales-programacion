@@ -2,21 +2,9 @@ class Main {
 
     public static void main(String[] args) {
 
-        // "mi_id_\r\n" + //
-        // "#comentario \r\n" + //
-        // "while\r\n" + //
-        // "for\r\n" + //
-        // ">=\r\n" + //
-        // "<\r\n" + //
-        // "'cadena en comillas simples'\r\n" + //
-        // "\r\n" + //
-        // "#un error se puede presentar como la siguiente linea\r\n" + //
-        // "\r\n" + //
-        // "\" mi cadena que no cierra";
-
         Analizer analizer = new Analizer();
 
-        String stringToAnalize = "rapeme\"hola\"23453-\"hell\"";
+        String stringToAnalize = "def if \"cadena\" : ( 4 + 5 )\nmi_id_\n#commentario\nwhile\nfor\n>=\n<\n'cadena en comillas simples'\n\n#un error se puede presentar como la siguiente linea\n\" mi cadena que no cierra";
 
         analizer.start(stringToAnalize);
 

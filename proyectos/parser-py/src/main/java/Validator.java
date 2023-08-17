@@ -10,7 +10,11 @@ public class Validator {
 
     final Character[] DELIMITERS = {
             '(', ')', '[', ']', '{', '}', '<', '>', '=', '+', '-', '*', '/', '%', '^', '&', '|', '!', '~',
-            ';', ':', ',', '.', '?', '\'', '"', '`', ' ', '\t', '\n', ' '
+            ';', ':', ',', '.', '?', '\'', '"', '`', ' ', '\t', '\n', '#'
+    };
+
+    final String[] OTHERS = {
+            "(", ")", "{", "}", "[", "]", ",", ";", ":"
     };
 
     final String[] ARITHMETIC_OP = {
@@ -28,6 +32,10 @@ public class Validator {
     final String[] LOGIC_OP = {
             "and", "or", "not"
     };
+
+    public boolean isOther(String currentString) {
+        return includes(currentString, OTHERS);
+    }
 
     public boolean isLogicOperator(String currentString) {
         return includes(currentString, LOGIC_OP);
@@ -69,6 +77,19 @@ public class Validator {
         }
     }
 
+    public boolean isIdentifier(String currentString) {
+
+        if (!Character.isLetter(currentString.charAt(0)) && currentString.charAt(0) != '_')
+            return false;
+
+        for (int i = 1; i < currentString.length(); i++) {
+            if (!Character.isLetterOrDigit(currentString.charAt(i)) && currentString.charAt(i) != '_')
+                return false;
+        }
+
+        return true;
+    }
+
     public boolean isNumber(String currentString) {
         try {
             Integer.valueOf(currentString);
@@ -80,7 +101,11 @@ public class Validator {
 
     public boolean isPossibleToken(Node<Character> currentChar) {
         return currentChar.getNext() == null || includes(currentChar.getNext().getContent(), DELIMITERS)
-                || includes(currentChar.getContent(), DELIMITERS);
+                || isDelimiter(currentChar.getContent());
+    }
+
+    public boolean isDelimiter(char ch) {
+        return includes(ch, DELIMITERS);
     }
 
     public <T> boolean includes(T target, T[] arr) {
