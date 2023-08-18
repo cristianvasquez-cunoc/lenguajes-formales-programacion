@@ -50,7 +50,7 @@ public class TokenGenerator {
             return null;
 
         // handle constants strings
-        if (currentStrg.equals("\"")) {
+        if (currentStrg.equals("\"") || currentStrg.equals("'")) {
             isGeneratingString = true;
             return null;
         }
@@ -62,9 +62,10 @@ public class TokenGenerator {
             return new Token(TokenType.CONSTANT, accumulator.getString(), lineRead, columnRead);
         }
 
-        if (nextChar.equals('\"') && isGeneratingString)
+        if ((nextChar.equals('\"') || nextChar.equals('\'')) && isGeneratingString)
             return null;
 
+        // validate tokens
         if (validator.isKeyWord(currentStrg)) {
             tokenTypeRead = TokenType.KEY_WORD;
         } else if (validator.isArithmeticOperator(currentStrg)) {

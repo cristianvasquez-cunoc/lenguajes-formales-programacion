@@ -64,8 +64,10 @@ public class Validator {
     }
 
     public boolean isString(String currentString) {
-        return (currentString.length() > 1 && currentString.charAt(0) == '"'
-                && currentString.charAt(currentString.length() - 1) == '"');
+        return (currentString.length() > 1 && ((currentString.charAt(0) == '"'
+                && currentString.charAt(currentString.length() - 1) == '"')
+                || (currentString.charAt(0) == '\''
+                        && currentString.charAt(currentString.length() - 1) == '\'')));
     }
 
     public boolean isDouble(String currentString) {
