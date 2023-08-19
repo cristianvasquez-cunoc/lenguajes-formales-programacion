@@ -8,6 +8,7 @@ public class TokenGenerator {
     TokenType tokenTypeRead;
 
     boolean isGeneratingString = false;
+    boolean isGeneratingComment = false;
 
     public TokenGenerator() {
         this.lineRead = 0;
@@ -17,24 +18,42 @@ public class TokenGenerator {
     public Token generateToken(Validator validator, Accumulator accumulator, Node<Character> nextCharNode) {
 
         Character nextChar;
+        tokenTypeRead = null;
+        String currentStrg = accumulator.getString();
         try {
             nextChar = nextCharNode.getContent();
         } catch (NullPointerException e) {
             nextChar = '\0';
+
+            if (isGeneratingString && !validator.isString(currentStrg))
+                return new Token(TokenType.ERROR, accumulator.getString(), lineRead, columnRead);
+
         }
 
-        tokenTypeRead = null;
-        String currentStrg = accumulator.getString();
-
-        // ignore spaces
-        if (currentStrg.equals(" ")) {
+        // ignore spaces, tabs or line break
+        if (currentStrg.length() == 1
+                && validator.includes(currentStrg.charAt(0), new Character[] { '\t', '\n', ' ', '\r' })) {
             accumulator.empty();
             return null;
         }
 
+        // handle comments
+        if (currentStrg.equals("#"))
+            isGeneratingComment = true;
+
+        if (isGeneratingComment && (nextChar.equals('\n') || nextChar.equals('\0'))) {
+            isGeneratingComment = false;
+            return new Token(TokenType.COMMENT, accumulator.getString(), lineRead, columnRead);
+        }
+
+        if (isGeneratingComment)
+            return null;
+
         // handle constants strings
-        if (currentStrg.equals("\""))
+        if (currentStrg.equals("\"") || currentStrg.equals("'")) {
             isGeneratingString = true;
+            return null;
+        }
 
         if (isGeneratingString && !validator.isString(currentStrg)) {
             return null;
@@ -43,9 +62,10 @@ public class TokenGenerator {
             return new Token(TokenType.CONSTANT, accumulator.getString(), lineRead, columnRead);
         }
 
-        if (nextChar.equals('\"') && isGeneratingString)
+        if ((nextChar.equals('\"') || nextChar.equals('\'')) && isGeneratingString)
             return null;
 
+        // validate tokens
         if (validator.isKeyWord(currentStrg)) {
             tokenTypeRead = TokenType.KEY_WORD;
         } else if (validator.isArithmeticOperator(currentStrg)) {
@@ -79,6 +99,14 @@ public class TokenGenerator {
                 return null;
 
             tokenTypeRead = TokenType.CONSTANT;
+
+        } else if (validator.isIdentifier(currentStrg)) {
+
+            tokenTypeRead = TokenType.IDENTIFIER;
+
+        } else if (validator.isOther(currentStrg)) {
+
+            tokenTypeRead = TokenType.OTHER;
 
         } else {
 

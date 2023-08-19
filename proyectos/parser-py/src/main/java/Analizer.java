@@ -29,7 +29,8 @@ public class Analizer {
 
                 if (newTk != null) {// means that it's a valid token
                     acc.empty();
-                    System.out.println(newTk.toString());
+                    String text = newTk.toString();
+                    System.out.println(text);
                 }
             }
 
