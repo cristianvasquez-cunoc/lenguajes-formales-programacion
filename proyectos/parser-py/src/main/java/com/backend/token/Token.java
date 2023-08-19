@@ -1,4 +1,4 @@
-package token;
+package com.backend.token;
 
 public class Token {
     TokenType type;

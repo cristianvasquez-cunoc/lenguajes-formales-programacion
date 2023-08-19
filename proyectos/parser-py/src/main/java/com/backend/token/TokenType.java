@@ -1,4 +1,4 @@
-package token;
+package com.backend.token;
 
 public enum TokenType {
     KEY_WORD("key word"),

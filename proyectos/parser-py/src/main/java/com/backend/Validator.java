@@ -1,4 +1,6 @@
-import lists.Node;
+package com.backend;
+
+import com.backend.lists.Node;
 
 public class Validator {
 

@@ -1,5 +1,6 @@
-import lists.Node;
-import lists.Queue;
+package com.backend;
+
+import com.backend.lists.*;
 
 public class Accumulator {
 

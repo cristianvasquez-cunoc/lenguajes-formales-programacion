@@ -1,7 +1,7 @@
+package com.backend;
 
-import lists.Node;
-import lists.Queue;
-import token.Token;
+import com.backend.lists.*;
+import com.backend.token.Token;
 
 public class Analizer {
 

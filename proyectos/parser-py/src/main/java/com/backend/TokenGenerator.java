@@ -1,6 +1,7 @@
-import lists.Node;
-import token.Token;
-import token.TokenType;
+package com.backend;
+
+import com.backend.lists.Node;
+import com.backend.token.*;
 
 public class TokenGenerator {
     int lineRead;
