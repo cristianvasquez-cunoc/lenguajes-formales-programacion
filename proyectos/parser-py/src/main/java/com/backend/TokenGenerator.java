@@ -26,8 +26,11 @@ public class TokenGenerator {
         } catch (NullPointerException e) {
             nextChar = '\0';
 
-            if (isGeneratingString && !validator.isString(currentStrg))
-                return new Token(TokenType.ERROR, accumulator.getString(), lineRead, columnRead);
+            if (isGeneratingString && !validator.isString(currentStrg)) {
+                int col = accumulator.getColumnInQueue();
+                accumulator.setColumnInQueue(columnRead + 1);
+                return new Token(TokenType.ERROR, accumulator.getString(), lineRead, col);
+            }
 
         }
 
@@ -44,7 +47,9 @@ public class TokenGenerator {
 
         if (isGeneratingComment && (nextChar.equals('\n') || nextChar.equals('\0'))) {
             isGeneratingComment = false;
-            return new Token(TokenType.COMMENT, accumulator.getString(), lineRead, columnRead);
+            int col = accumulator.getColumnInQueue();
+            accumulator.setColumnInQueue(columnRead + 1);
+            return new Token(TokenType.COMMENT, accumulator.getString(), lineRead, col);
         }
 
         if (isGeneratingComment)
@@ -60,7 +65,9 @@ public class TokenGenerator {
             return null;
         } else if (isGeneratingString) {
             isGeneratingString = false;
-            return new Token(TokenType.CONSTANT, accumulator.getString(), lineRead, columnRead);
+            int col = accumulator.getColumnInQueue();
+            accumulator.setColumnInQueue(columnRead + 1);
+            return new Token(TokenType.CONSTANT, accumulator.getString(), lineRead, col);
         }
 
         if ((nextChar.equals('\"') || nextChar.equals('\'')) && isGeneratingString)
@@ -118,7 +125,9 @@ public class TokenGenerator {
         }
         ;
 
-        return new Token(tokenTypeRead, accumulator.getString(), lineRead, columnRead);
+        int col = accumulator.getColumnInQueue();
+        accumulator.setColumnInQueue(columnRead + 1);
+        return new Token(tokenTypeRead, accumulator.getString(), lineRead, col);
     }
 
     public void updatePointer(Node<Character> currentChar) {
