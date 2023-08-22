@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96092cb9-1d2d-497c-911d-c0d3206530cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/backend/graph/Graph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/backend/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/backend/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/backend/graphic/Graphic.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frontend/Parser_py.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frontend/Parser_py.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frontend/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frontend/controllers/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/frontend/Graph.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/frontend/Graph.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/frontend/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/frontend/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/frontend/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/frontend/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +43,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "fixGraphviz",
+    "git-widget-placeholder": "graphs",
     "last_opened_file_path": "C:/Users/aleja/Desktop/com/java/javafx/javafx-sdk-20.0.2/lib",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
@@ -64,19 +63,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.Parser_py">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.backend.Main" />
-      <module name="parser-py" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.backend.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.backend.Test" />
       <module name="parser-py" />
@@ -93,7 +79,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Test" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -128,12 +113,6 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="((TextArea)((MainController)this).textArea).content" custom="javafx.scene.control.TextArea,com.frontend.controllers.MainController" />
-        <watch expression="codeArea.styleCodecs.value._2" />
-      </configuration>
-    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

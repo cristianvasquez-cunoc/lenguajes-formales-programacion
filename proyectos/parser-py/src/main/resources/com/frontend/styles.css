@@ -8,6 +8,17 @@
     -fx-stroke: #fdfdfd;
 }
 
+.menu-button {
+    -fx-background-color: none;
+    -fx-text-fill: #bfbfbf;
+    -fx-font-size: 14px;
+    -fx-font-family: "Lucida Console";
+}
+
+.menu-button-focus {
+    -fx-text-fill: #d8d8d8;
+}
+
 .skyblue-text {
     -fx-fill: #0284c7;
 }

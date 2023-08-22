@@ -8,14 +8,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.StyleClassedTextArea;
-import org.fxmisc.richtext.StyledTextArea;
-import org.fxmisc.richtext.model.StyleSpans;
-import org.fxmisc.richtext.model.StyleSpansBuilder;
 import org.fxmisc.richtext.model.TwoDimensional;
 
 import java.io.IOException;
@@ -25,8 +23,6 @@ public class Parser_py extends Application {
 
     MainController mainController;
     StyleClassedTextArea codeArea;
-    FXMLLoader loader;
-    Parent root;
     int codeTextAreaSize;
 
     public static void main(String[] args) {
@@ -37,20 +33,34 @@ public class Parser_py extends Application {
     public void start(Stage stage) throws Exception {
 
         try {
-            loader = new FXMLLoader(getClass().getResource("Main.fxml"));
-            root = loader.load();
-            mainController = loader.getController();
-            createCodeArea(root);
-
-            Scene scene = new Scene(root);
-
             setUpStage(stage);
+            String CSS = getClass().getResource("styles.css").toExternalForm();
 
-            String css = getClass().getResource("styles.css").toExternalForm();
-            scene.getStylesheets().add(css);
-            stage.setScene(scene);
+            FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("Main.fxml"));
+            Parent rootMain = loaderMain.load();
+            mainController = loaderMain.getController();
+            createCodeArea(rootMain);
+            Scene mainScene = new Scene(rootMain);
+            mainScene.getStylesheets().add(CSS);
 
+            FXMLLoader loaderGraph = new FXMLLoader(getClass().getResource("Graph.fxml"));
+            Parent rootGraph = loaderGraph.load();
+            Scene graphScene = new Scene(rootGraph);
+            graphScene.getStylesheets().add(CSS);
+
+            stage.setScene(mainScene);
             stage.show();
+
+            // Handle navigation action (e.g., button click)
+            Button switchToGraphSceneButton = (Button) rootMain.lookup("#switchToGraphScene");
+            switchToGraphSceneButton.setOnAction(event -> {
+                stage.setScene(graphScene);
+            });
+
+            Button switchToMainSceneButton = (Button) rootGraph.lookup("#switchToMainScene");
+            switchToMainSceneButton.setOnAction(event -> {
+                stage.setScene(mainScene);
+            });
 
             addEventListeners();
 
