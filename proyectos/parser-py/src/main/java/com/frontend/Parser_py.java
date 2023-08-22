@@ -23,7 +23,10 @@ public class Parser_py extends Application {
 
     MainController mainController;
     StyleClassedTextArea codeArea;
+    ArrayList<Token> tokens;
     int codeTextAreaSize;
+
+    GraphScene graphScene;
 
     public static void main(String[] args) {
         launch();
@@ -31,6 +34,8 @@ public class Parser_py extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
+        tokens = new ArrayList<>();
 
         try {
             setUpStage(stage);
@@ -47,14 +52,17 @@ public class Parser_py extends Application {
             Parent rootGraph = loaderGraph.load();
             Scene graphScene = new Scene(rootGraph);
             graphScene.getStylesheets().add(CSS);
+            this.graphScene = new GraphScene(rootGraph);
 
             stage.setScene(mainScene);
             stage.show();
 
-            // Handle navigation action (e.g., button click)
+            // Handle navigation action (button click)
             Button switchToGraphSceneButton = (Button) rootMain.lookup("#switchToGraphScene");
             switchToGraphSceneButton.setOnAction(event -> {
                 stage.setScene(graphScene);
+                this.graphScene.showTokensMatching(tokens,TokenType.IDENTIFIER);
+
             });
 
             Button switchToMainSceneButton = (Button) rootGraph.lookup("#switchToMainScene");
@@ -112,7 +120,7 @@ public class Parser_py extends Application {
 
             Analizer analizer = new Analizer();
             analizer.start(codeArea.getText());
-            ArrayList<Token> tokens = analizer.getTokens();
+            tokens = analizer.getTokens();
 
             for (int i = 0; i < tokens.size(); i++) {
 

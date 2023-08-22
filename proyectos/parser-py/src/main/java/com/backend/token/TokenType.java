@@ -1,16 +1,16 @@
 package com.backend.token;
 
 public enum TokenType {
-    KEY_WORD("key word"),
-    IDENTIFIER("identifier"),
-    ARITHMETIC_OP("arithmetic operator"),
-    COMPARISION_OP("comparission operator"),
-    LOGIC_OP("logic operator"),
-    ASSIGNMENT_OP("assignment operator"),
-    CONSTANT("constant"),
-    COMMENT("comment"),
+    KEY_WORD("palabra reservada"),
+    IDENTIFIER("identificadores"),
+    ARITHMETIC_OP("operador aritmetico"),
+    COMPARISION_OP("operador de comparacion"),
+    LOGIC_OP("operador logico"),
+    ASSIGNMENT_OP("operador asignacion"),
+    CONSTANT("constante"),
+    COMMENT("comentario"),
     ERROR("error"),
-    OTHER("other");
+    OTHER("otro");
 
     private final String value;
 

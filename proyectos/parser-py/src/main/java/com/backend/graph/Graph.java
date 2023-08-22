@@ -23,19 +23,22 @@ public class Graph {
         end = lexeme.charAt(lexeme.length() - 1);
     }
 
-    public void createPng() throws IOException {
+    public String createPng() throws IOException {
 
+        String pathname = null;
         try {
+            pathname = "./src/main/resources/graph.png";
             generateDot();
             MutableGraph graph = new Parser().read(dot);
-            Graphviz.fromGraph(graph).render(Format.PNG).toFile(new File("graph.png"));
+            Graphviz.fromGraph(graph).render(Format.PNG).toFile(new File(pathname));
 
-        } catch (IOException e ) {
+        } catch (IOException e) {
             System.out.println(e.getStackTrace());
-        } catch (StringIndexOutOfBoundsException e ) {
+        } catch (StringIndexOutOfBoundsException e) {
             System.out.println("cadena vacia");
         }
 
+        return pathname;
 
     }
 
