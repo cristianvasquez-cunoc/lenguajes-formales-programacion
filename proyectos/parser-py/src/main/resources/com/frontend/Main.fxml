@@ -20,6 +20,14 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
+                  <Label prefHeight="30.0" text="Abrir archivo" textFill="#bfbfbf">
+                     <font>
+                        <Font name="Lucida Console" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
                   <Label prefHeight="30.0" text="Graficar" textFill="#bfbfbf">
                      <font>
                         <Font name="Lucida Console" size="14.0" />

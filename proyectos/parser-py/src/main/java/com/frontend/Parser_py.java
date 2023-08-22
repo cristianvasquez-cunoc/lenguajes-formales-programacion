@@ -140,18 +140,6 @@ public class Parser_py extends Application {
 
             }
 
-//            if(codeTextAreaSize > 6) {
-//
-//                int start = 1; // Set the start index of the text to be colored
-//                int end = 3;   // Set the end index of the text to be colored
-//
-//
-//                List<String> styleClasses = new ArrayList<>();
-//                styleClasses.add("skyblue-text");
-//
-//                codeArea.setStyle(start, end, styleClasses);
-//
-//            }
         }
     }
 
