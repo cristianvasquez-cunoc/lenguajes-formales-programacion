@@ -12,129 +12,122 @@ public class TokenGenerator {
     boolean isGeneratingComment = false;
 
     public TokenGenerator() {
-        this.lineRead = 0;
-        this.columnRead = 0;
+        this.lineRead = 1;
+        this.columnRead = 1;
     }
 
     public Token generateToken(Validator validator, Accumulator accumulator, Node<Character> nextCharNode) {
 
         Character nextChar;
         tokenTypeRead = null;
-        String currentStrg = accumulator.getString();
+        String lexeme = accumulator.getString();
         try {
             nextChar = nextCharNode.getContent();
         } catch (NullPointerException e) {
             nextChar = '\0';
 
-            if (isGeneratingString && !validator.isString(currentStrg)) {
-                int col = accumulator.getColumnInQueue();
-                accumulator.setColumnInQueue(columnRead + 1);
-                return new Token(TokenType.ERROR, accumulator.getString(), lineRead, col);
+            if (isGeneratingString && !validator.isString(lexeme)) {
+                return new Token(TokenType.ERROR, lexeme, lineRead, columnRead);
             }
 
         }
 
         // ignore spaces, tabs or line break
-        if (currentStrg.length() == 1
-                && validator.includes(currentStrg.charAt(0), new Character[] { '\t', '\n', ' ', '\r' })) {
+        if (lexeme.length() == 1
+                && validator.includes(lexeme.charAt(0), new Character[] { '\t', '\n', ' ', '\r' })) {
             accumulator.empty();
             return null;
         }
 
         // handle comments
-        if (currentStrg.equals("#"))
+        if (lexeme.equals("#"))
             isGeneratingComment = true;
 
         if (isGeneratingComment && (nextChar.equals('\n') || nextChar.equals('\0'))) {
             isGeneratingComment = false;
-            int col = accumulator.getColumnInQueue();
-            accumulator.setColumnInQueue(columnRead + 1);
-            return new Token(TokenType.COMMENT, accumulator.getString(), lineRead, col);
+            return new Token(TokenType.COMMENT, lexeme, lineRead, columnRead);
         }
 
         if (isGeneratingComment)
             return null;
 
         // handle constants strings
-        if (currentStrg.equals("\"") || currentStrg.equals("'")) {
+        if (lexeme.equals("\"") || lexeme.equals("'")) {
             isGeneratingString = true;
             return null;
         }
 
-        if (isGeneratingString && !validator.isString(currentStrg)) {
+        if (isGeneratingString && !validator.isString(lexeme)) {
             return null;
         } else if (isGeneratingString) {
             isGeneratingString = false;
-            int col = accumulator.getColumnInQueue();
-            accumulator.setColumnInQueue(columnRead + 1);
-            return new Token(TokenType.CONSTANT, accumulator.getString(), lineRead, col);
+            return new Token(TokenType.CONSTANT, lexeme, lineRead, columnRead);
         }
 
         if ((nextChar.equals('\"') || nextChar.equals('\'')) && isGeneratingString)
             return null;
 
         // validate tokens
-        if (validator.isKeyWord(currentStrg)) {
+        if (validator.isKeyWord(lexeme)) {
             tokenTypeRead = TokenType.KEY_WORD;
-        } else if (validator.isArithmeticOperator(currentStrg)) {
+        } else if (validator.isArithmeticOperator(lexeme)) {
 
             if (nextChar.equals('=')) // means token will be assignment_op on next loop
                 return null;
-            if (currentStrg.equals("/") && nextChar.equals('/')) // means token it's gonna be //
+            if (lexeme.equals("/") && nextChar.equals('/')) // means token it's gonna be //
                 return null;
 
             tokenTypeRead = TokenType.ARITHMETIC_OP;
-        } else if (validator.isComparissionOperator(currentStrg)) {
+        } else if (validator.isComparissionOperator(lexeme)) {
 
-            if ((currentStrg.equals(">") || currentStrg.equals("<")) && nextChar.equals('='))
+            if ((lexeme.equals(">") || lexeme.equals("<")) && nextChar.equals('='))
                 return null;// it's gonna be comparission with "="
 
             tokenTypeRead = TokenType.COMPARISION_OP;
-        } else if (validator.isAssignmentOperator(currentStrg)) {
+        } else if (validator.isAssignmentOperator(lexeme)) {
 
-            if (nextChar.equals('=') && currentStrg.equals("=")) // means it's gonna be == comparission op
+            if (nextChar.equals('=') && lexeme.equals("=")) // means it's gonna be == comparission op
                 return null;
 
             tokenTypeRead = TokenType.ASSIGNMENT_OP;
-        } else if (validator.isLogicOperator(currentStrg)) {
+        } else if (validator.isLogicOperator(lexeme)) {
             tokenTypeRead = TokenType.LOGIC_OP;
-        } else if (validator.isConstant(currentStrg)) {
+        } else if (validator.isConstant(lexeme)) {
 
-            if (nextChar.equals('.') && validator.isNumber(currentStrg)) // it could be double
+            if (nextChar.equals('.') && validator.isNumber(lexeme)) // it could be double
                 return null;
 
-            if (validator.isDouble(currentStrg) && validator.isNumber(String.valueOf(nextChar)))
+            if (validator.isDouble(lexeme) && validator.isNumber(String.valueOf(nextChar)))
                 return null;
 
             tokenTypeRead = TokenType.CONSTANT;
 
-        } else if (validator.isIdentifier(currentStrg)) {
+        } else if (validator.isIdentifier(lexeme)) {
 
             tokenTypeRead = TokenType.IDENTIFIER;
 
-        } else if (validator.isOther(currentStrg)) {
+        } else if (validator.isOther(lexeme)) {
 
             tokenTypeRead = TokenType.OTHER;
 
         } else {
 
-            if (currentStrg.equals("!") && nextChar.equals('='))// it's gonna be assignment !=
+            if (lexeme.equals("!") && nextChar.equals('='))// it's gonna be assignment !=
                 return null;
 
             tokenTypeRead = TokenType.ERROR;
         }
         ;
 
-        int col = accumulator.getColumnInQueue();
-        accumulator.setColumnInQueue(columnRead + 1);
-        return new Token(tokenTypeRead, accumulator.getString(), lineRead, col);
+        return new Token(tokenTypeRead, lexeme, lineRead, columnRead);
     }
+
 
     public void updatePointer(Node<Character> currentChar) {
         // update line and column
         if (currentChar.getContent().equals('\n')) {
             lineRead++;
-            columnRead = 0;
+            columnRead = 1;
         } else {
             columnRead++;
         }

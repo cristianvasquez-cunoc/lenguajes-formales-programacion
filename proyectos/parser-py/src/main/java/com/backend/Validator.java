@@ -16,7 +16,7 @@ public class Validator {
     };
 
     final String[] OTHERS = {
-            "(", ")", "{", "}", "[", "]", ",", ";", ":"
+            "(", ")", "{", "}", "[", "]", ",", ";", ":", "."
     };
 
     final String[] ARITHMETIC_OP = {

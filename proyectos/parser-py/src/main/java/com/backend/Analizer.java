@@ -1,7 +1,10 @@
 package com.backend;
 
-import com.backend.lists.*;
+import com.backend.lists.Node;
+import com.backend.lists.Queue;
 import com.backend.token.Token;
+
+import java.util.ArrayList;
 
 public class Analizer {
 
@@ -10,6 +13,7 @@ public class Analizer {
     Queue<Character> characters;
     TokenGenerator tkGenerator;
     Validator validator;
+    ArrayList<Token> tokens;
 
     public void start(String stringToAnalize) {
 
@@ -17,6 +21,7 @@ public class Analizer {
         acc = new Accumulator("");
         tkGenerator = new TokenGenerator();
         validator = new Validator();
+        tokens = new ArrayList<>();
 
         while (!characters.isEmpty()) {
             // remove char from characters and add it to accumulator
@@ -29,8 +34,7 @@ public class Analizer {
 
                 if (newTk != null) {// means that it's a valid token
                     acc.empty();
-                    String text = newTk.toString();
-                    System.out.println(text);
+                    tokens.add(newTk);
                 }
             }
 
@@ -51,4 +55,7 @@ public class Analizer {
 
     }
 
+    public ArrayList<Token> getTokens() {
+        return tokens;
+    }
 }
