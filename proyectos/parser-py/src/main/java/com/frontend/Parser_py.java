@@ -3,8 +3,7 @@ package com.frontend;
 import com.backend.*;
 import com.backend.token.Token;
 import com.backend.token.TokenType;
-import com.frontend.controllers.MainController;
-import javafx.application.Application;
+import com.frontend.controllers.MainSceneController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,51 +12,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.StyleClassedTextArea;
-import org.fxmisc.richtext.StyledTextArea;
-import org.fxmisc.richtext.model.StyleSpans;
-import org.fxmisc.richtext.model.StyleSpansBuilder;
 import org.fxmisc.richtext.model.TwoDimensional;
 
 import java.io.IOException;
 import java.util.*;
 
-public class Parser_py extends Application {
+public class MainScene extends Scene{
 
-    MainController mainController;
+    MainSceneController controller;
     StyleClassedTextArea codeArea;
-    FXMLLoader loader;
-    Parent root;
     int codeTextAreaSize;
 
-    public static void main(String[] args) {
-        launch();
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-
-        try {
-            loader = new FXMLLoader(getClass().getResource("Main.fxml"));
-            root = loader.load();
-            mainController = loader.getController();
-            createCodeArea(root);
-
-            Scene scene = new Scene(root);
-
-            setUpStage(stage);
-
-            String css = getClass().getResource("styles.css").toExternalForm();
-            scene.getStylesheets().add(css);
-            stage.setScene(scene);
-
-            stage.show();
-
-            addEventListeners();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public MainScene(Parent parent, MainSceneController controller) {
+        super(parent);
+        this.controller = controller;
     }
 
     public void createCodeArea(Parent root) {
@@ -74,22 +42,13 @@ public class Parser_py extends Application {
         anchorPane.getChildren().add(codeArea);
     }
 
-    public void setUpStage (Stage stage) {
-        Image icon = new Image("icon.png");
-        stage.getIcons().add(icon);
-        stage.setTitle("Parser py");
-        stage.setWidth(960);
-        stage.setHeight(760);
-        stage.setResizable(false);
-    }
-
     public void addEventListeners() {
         codeArea.setOnKeyReleased(event -> {
             applyColors();
-            mainController.setLineCol(codeArea);
+            controller.setLineCol(codeArea);
         });
         codeArea.setOnMouseClicked(mouseEvent -> {
-            mainController.setLineCol(codeArea);
+            controller.setLineCol(codeArea);
         });
     }
 
@@ -139,21 +98,35 @@ public class Parser_py extends Application {
                 codeArea.setStyle(start, end, styleClasses);
 
             }
-
-//            if(codeTextAreaSize > 6) {
-//
-//                int start = 1; // Set the start index of the text to be colored
-//                int end = 3;   // Set the end index of the text to be colored
-//
-//
-//                List<String> styleClasses = new ArrayList<>();
-//                styleClasses.add("skyblue-text");
-//
-//                codeArea.setStyle(start, end, styleClasses);
-//
-//            }
         }
     }
 
 
 }
+
+
+//    public void start(Stage stage) throws Exception {
+//
+//        try {
+//            loader = new FXMLLoader(getClass().getResource("Main.fxml"));
+//            root = loader.load();
+//            controller = loader.getController();
+//            createCodeArea(root);
+//
+//            Scene scene = new Scene(root);
+//
+//            setUpStage(stage);
+//
+//            String css = getClass().getResource("main-scene.css").toExternalForm();
+//            scene.getStylesheets().add(css);
+//            stage.setScene(scene);
+//
+//            stage.show();
+//
+//            addEventListeners();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }

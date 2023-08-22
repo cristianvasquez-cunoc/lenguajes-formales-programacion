@@ -5,19 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96092cb9-1d2d-497c-911d-c0d3206530cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/frontend/Parser_py.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Parser_py.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Parser_py.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/backend/Accumulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/backend/Accumulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/backend/Analizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/backend/Analizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/backend/TokenGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/backend/TokenGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/backend/Validator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/backend/Validator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/backend/token/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/backend/token/Token.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frontend/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/backend/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/backend/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/backend/graphic/Graphic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/backend/graphic/Graphic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frontend/Parser_py.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frontend/Parser_py.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/frontend/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frontend/controllers/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/frontend/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/frontend/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/frontend/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/frontend/main-scene.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +47,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;changeColor&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;graphviz&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/aleja/Desktop/com/java/javafx/javafx-sdk-20.0.2/lib&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
@@ -70,12 +67,12 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.Parser_py">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.backend.Main" />
+    <configuration name="Parser_py" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.frontend.Parser_py" />
       <module name="parser-py" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.backend.*" />
+          <option name="PATTERN" value="com.frontend.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -98,8 +95,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Parser_py" />
         <item itemvalue="Application.Test" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -134,17 +131,11 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/backend/Test.java</url>
-          <line>9</line>
+          <line>12</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="((TextArea)((MainController)this).textArea).content" custom="javafx.scene.control.TextArea,com.frontend.controllers.MainController" />
-        <watch expression="codeArea.styleCodecs.value._2" />
-      </configuration>
-    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -6,6 +6,7 @@ module com.parserpy {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires org.fxmisc.richtext;
+    requires graphviz.java;
 
     opens com.frontend to javafx.fxml;
     exports com.frontend;
