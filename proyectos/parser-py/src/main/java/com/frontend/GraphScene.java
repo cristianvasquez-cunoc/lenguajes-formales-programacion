@@ -1,6 +1,7 @@
 package com.frontend;
 
 import com.backend.graph.Graph;
+import com.backend.graph.GraphLoader;
 import com.backend.token.Token;
 import com.backend.token.TokenType;
 import javafx.scene.Parent;
@@ -18,6 +19,8 @@ public class GraphScene {
     FlowPane tokensContainer;
     TokenType tokenType;
     Parent root;
+    ImageView tokenImage;
+    Label tokenTitle;
 
 
     public GraphScene( Parent root) {
@@ -55,17 +58,17 @@ public class GraphScene {
 
     public void graphSelectedToken (Token token) {
         try {
-
-
             //create a threat that waits for the image to be created and then can show the image on screen.
+
             Graph graph = new Graph(token.getLexeme());
             graph.createPng();
-            ImageView image = (ImageView) root.lookup("#graphImage");
-            image.setImage(null);
-            Label title = (Label) root.lookup("#graphTitle");
 
-            title.setText(tokenType.getValue());
-            image.setImage(new Image("graph.png"));
+            tokenImage = (ImageView) root.lookup("#graphImage");
+            GraphLoader graphLoader = new GraphLoader(tokenImage, graph.getTime());
+            graphLoader.start();
+
+            Label tokenTitle = (Label) root.lookup("#graphTitle");
+            tokenTitle.setText(tokenType.getValue());
 
         } catch (IOException e) {
             throw new RuntimeException(e);

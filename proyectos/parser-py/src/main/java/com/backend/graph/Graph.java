@@ -7,6 +7,8 @@ import guru.nidi.graphviz.parse.Parser;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
+
 
 public class Graph {
 
@@ -14,6 +16,7 @@ public class Graph {
     String dot;
     char start;
     char end;
+    long time;
 
     public Graph(String lexeme) {
         // Escape double quotes if they are present within the lexeme
@@ -23,14 +26,14 @@ public class Graph {
         end = lexeme.charAt(lexeme.length() - 1);
     }
 
-    public String createPng() throws IOException {
+    public void createPng() throws IOException {
 
-        String pathname = null;
         try {
-            pathname = "./src/main/resources/graph.png";
+            String pathname = "./src/main/resources/com/frontend/graphs/graph";
+            time = new Date().getTime();
             generateDot();
             MutableGraph graph = new Parser().read(dot);
-            Graphviz.fromGraph(graph).render(Format.PNG).toFile(new File(pathname));
+            Graphviz.fromGraph(graph).render(Format.PNG).toFile(new File(pathname + time + ".png"));
 
         } catch (IOException e) {
             System.out.println(e.getStackTrace());
@@ -38,7 +41,6 @@ public class Graph {
             System.out.println("cadena vacia");
         }
 
-        return pathname;
 
     }
 
@@ -52,7 +54,11 @@ public class Graph {
             dot += " -> " + currentCh;
         }
 
-        dot += " -> " + end +"}";
+        dot += " -> " + end +"; graph [bgcolor=\"#e2e8f0\"];}";
 
+    }
+
+    public long getTime() {
+        return time;
     }
 }
