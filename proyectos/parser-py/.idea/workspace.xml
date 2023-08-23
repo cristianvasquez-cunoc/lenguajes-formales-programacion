@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="parser-py:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96092cb9-1d2d-497c-911d-c0d3206530cb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/backend/graph/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/backend/graph/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frontend/GraphScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frontend/GraphScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frontend/Parser_py.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frontend/Parser_py.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frontend/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frontend/controllers/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/frontend/Graph.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/frontend/Graph.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/frontend/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/frontend/styles.css" afterDir="false" />
-    </list>
+    <list default="true" id="96092cb9-1d2d-497c-911d-c0d3206530cb" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
