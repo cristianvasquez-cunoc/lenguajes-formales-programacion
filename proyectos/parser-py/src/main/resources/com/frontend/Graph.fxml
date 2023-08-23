@@ -26,62 +26,7 @@
             <RowConstraints maxHeight="506.0" minHeight="10.0" prefHeight="506.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <FlowPane alignment="CENTER" orientation="VERTICAL" prefHeight="704.0" prefWidth="268.0" style="-fx-background-color: #1e293b;" vgap="70.0" GridPane.columnIndex="1" GridPane.rowSpan="2">
-               <children>
-                  <Label text="Identificadores" textFill="#f8fafc">
-                     <font>
-                        <Font name="Lucida Console" size="16.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <styleClass>
-                        <String fx:value="token-type" />
-                        <String fx:value="token-type-focus" />
-                     </styleClass>
-                  </Label>
-                  <Label styleClass="token-type" text="Aritmeticos" textFill="#f8fafc">
-                     <font>
-                        <Font name="Lucida Console" size="16.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
-                  <Label styleClass="token-type" text="Comparacion" textFill="#f8fafc">
-                     <font>
-                        <Font name="Lucida Console" size="16.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
-                  <Label styleClass="token-type" text="Logicos" textFill="#f8fafc">
-                     <font>
-                        <Font name="Lucida Console" size="16.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
-                  <Label styleClass="token-type" text="Asignacion" textFill="#f8fafc">
-                     <font>
-                        <Font name="Lucida Console" size="16.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
-                  <Label styleClass="token-type" text="Palabras clave" textFill="#f8fafc">
-                     <font>
-                        <Font name="Lucida Console" size="16.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
-               </children>
-            </FlowPane>
+            <FlowPane id="tokensClasification" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="704.0" prefWidth="268.0" style="-fx-background-color: #1e293b;" vgap="50.0" GridPane.columnIndex="1" GridPane.rowSpan="2" />
             <FlowPane id="tokensContainer" hgap="32.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #334155;">
                <padding>
                   <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />

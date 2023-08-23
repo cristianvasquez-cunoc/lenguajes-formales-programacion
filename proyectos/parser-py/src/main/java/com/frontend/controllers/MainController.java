@@ -34,24 +34,4 @@ public class MainController {
 
     }
 
-    @FXML
-    private void switchToGraphScene(ActionEvent event) {
-        try {
-            FXMLLoader graphLoader = new FXMLLoader(getClass().getResource("Graph.fxml"));
-            Parent graphRoot = graphLoader.load();
-            Scene graphScene = new Scene(graphRoot);
-
-            Stage graphStage = new Stage();
-            graphStage.setScene(graphScene);
-            graphStage.show();
-
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
 }

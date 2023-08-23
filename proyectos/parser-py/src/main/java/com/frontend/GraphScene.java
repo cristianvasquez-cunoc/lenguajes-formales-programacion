@@ -6,7 +6,6 @@ import com.backend.token.Token;
 import com.backend.token.TokenType;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 
@@ -15,51 +14,52 @@ import java.util.ArrayList;
 
 public class GraphScene {
 
+    ArrayList<Token> matchingTokens;
     ArrayList<Token> tokens;
     FlowPane tokensContainer;
     TokenType tokenType;
     Parent root;
     ImageView tokenImage;
     Label tokenTitle;
+    FlowPane tokensClasification;
+    ArrayList<Label> tokensClasificationLabels;
 
 
-    public GraphScene( Parent root) {
+    public GraphScene( Parent root, ArrayList<Token> tokens) {
         this.root = root;
+        this.tokens = tokens;
         tokensContainer = (FlowPane) root.lookup("#tokensContainer");
     }
 
-    public void showTokensMatching(ArrayList<Token> tokens, TokenType tokenType) {
+    public void showTokensMatching(TokenType tokenType) {
         this.tokenType= tokenType;
-        this.tokens = getAllTokensMatching(tokens);
+        getAllTokensMatching();
     }
 
-    public ArrayList<Token> getAllTokensMatching (ArrayList<Token> tokens) {
+    public void getAllTokensMatching () {
         tokensContainer.getChildren().clear();
-        ArrayList<Token> tokensMatching = new ArrayList<>();
+        matchingTokens = new ArrayList<>();
 
         Label initialText = new Label("Lista de tokens: \"" + tokenType.getValue() + '"');
-        initialText.getStyleClass().add("token-types__initial");
+        initialText.getStyleClass().add("tokens-filtered__initial");
         tokensContainer.getChildren().add(initialText);
 
         for (int i = 0; i < tokens.size(); i++) {
             Token tk = tokens.get(i);
             if(tk.getType().equals(tokenType)) {
-                tokensMatching.add(tk);
+                matchingTokens.add(tk);
                 Label label = new Label(tk.getLexeme());
-                label.getStyleClass().add("token-types__token");
+                label.getStyleClass().add("tokens-filtered__token");
                 tokensContainer.getChildren().add(label);
                 label.setOnMouseClicked(event -> {
                     graphSelectedToken(tk);
                 });
             }
         }
-        return tokensMatching;
     }
 
     public void graphSelectedToken (Token token) {
         try {
-            //create a threat that waits for the image to be created and then can show the image on screen.
-
             Graph graph = new Graph(token.getLexeme());
             graph.createPng();
 
@@ -67,7 +67,7 @@ public class GraphScene {
             GraphLoader graphLoader = new GraphLoader(tokenImage, graph.getTime());
             graphLoader.start();
 
-            Label tokenTitle = (Label) root.lookup("#graphTitle");
+            tokenTitle = (Label) root.lookup("#graphTitle");
             tokenTitle.setText(tokenType.getValue());
 
         } catch (IOException e) {
@@ -75,4 +75,35 @@ public class GraphScene {
         }
     }
 
+    public void loadTokenTypes() {
+        tokensClasification = (FlowPane) root.lookup("#tokensClasification");
+        TokenType[] tokensType = TokenType.values();
+        tokensClasificationLabels = new ArrayList<Label>();
+        for (int i = 0; i < tokensType.length; i++) {
+            TokenType tkTp = tokensType[i];
+            Label label = new Label(tkTp.getValue());
+            label.getStyleClass().add("token-type");
+            tokensClasification.getChildren().add(label);
+            tokensClasificationLabels.add(label);
+            label.setOnMouseClicked(event -> {
+                removeFocusFromtokensClasificationLabels();
+                label.getStyleClass().add("token-type-focus");
+                showTokensMatching(tkTp);
+            });
+        }
+    }
+
+    public void removeFocusFromtokensClasificationLabels() {
+        for (int i = 0; i < tokensClasificationLabels.size(); i++) {
+            tokensClasificationLabels.get(i).getStyleClass().remove("token-type-focus");
+        }
+    }
+
+    public void setTokens(ArrayList<Token> tokens) {
+        this.tokens = tokens;
+    }
+
+    public void setRoot(Parent root) {
+        this.root = root;
+    }
 }

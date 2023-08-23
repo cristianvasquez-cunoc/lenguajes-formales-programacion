@@ -52,7 +52,8 @@ public class Parser_py extends Application {
             Parent rootGraph = loaderGraph.load();
             Scene graphScene = new Scene(rootGraph);
             graphScene.getStylesheets().add(CSS);
-            this.graphScene = new GraphScene(rootGraph);
+            this.graphScene = new GraphScene(rootGraph,tokens);
+            this.graphScene.loadTokenTypes();
 
             stage.setScene(mainScene);
             stage.show();
@@ -61,7 +62,7 @@ public class Parser_py extends Application {
             Button switchToGraphSceneButton = (Button) rootMain.lookup("#switchToGraphScene");
             switchToGraphSceneButton.setOnAction(event -> {
                 stage.setScene(graphScene);
-                this.graphScene.showTokensMatching(tokens,TokenType.IDENTIFIER);
+                this.graphScene.setTokens(tokens);
 
             });
 

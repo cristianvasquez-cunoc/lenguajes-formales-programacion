@@ -46,16 +46,30 @@ public class Graph {
 
     public void generateDot() {
 
-        dot = "digraph G {rankdir=LR;" + end
-                + " [shape=doublecircle];node [shape=circle];start [shape=point, width=0];start -> " + start;
+        dot = "digraph G {rankdir=LR;" + verifyCharForDot(end)
+                + " [shape=doublecircle];node [shape=circle];start [shape=point, width=0];start -> " + verifyCharForDot(start);
 
-        for (int i = 1; i < lexeme.length() - 1; i++) {
+        int startI = ((int) start == 34) ? 2 : 1;
+        int endI = ((int) start == 34) ? lexeme.length() - 2 : lexeme.length() - 1;
+
+        for (int i = startI; i < endI; i++) {
             char currentCh = lexeme.charAt(i);
-            dot += " -> " + currentCh;
+            dot += " -> " + verifyCharForDot(currentCh);
         }
 
-        dot += " -> " + end +"; graph [bgcolor=\"#e2e8f0\"];}";
+        dot += " -> " + verifyCharForDot(end) + "; graph [bgcolor=\"#e2e8f0\"];}";
 
+        System.out.println(dot);
+    }
+
+    private String verifyCharForDot(char ch) {
+        if (ch == '<') {
+            return "<menor que>";
+        } else if(ch == '>') {
+            return "<mayor que>";
+        }else {
+            return "<" + ch + ">";
+        }
     }
 
     public long getTime() {

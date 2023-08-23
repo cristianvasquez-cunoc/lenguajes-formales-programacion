@@ -12,6 +12,7 @@
     -fx-text-fill: #bfbfbf;
     -fx-font-size: 16px;
     -fx-font-family: "Lucida Console";
+    -fx-cursor: hand;
 }
 
 .token-type-focus {
@@ -65,12 +66,12 @@
     -fx-fill: #cbd5e1;
 }
 
-.token-types__token, .token-types__initial {
+.tokens-filtered__token, .tokens-filtered__initial {
     -fx-text-fill: #d8d8d8;
     -fx-font-size: 14px;
 }
 
-.token-types__token {
+.tokens-filtered__token {
     -fx-background-color:   #475569;
     -fx-padding: 8px;
     -fx-font-size: 12px;
