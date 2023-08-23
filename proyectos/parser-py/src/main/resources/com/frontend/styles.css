@@ -1,0 +1,80 @@
+.code-area {
+    -fx-font-size: 16px;
+    -fx-background-color: #1e293b;
+    -fx-padding: 16 16 16 16;
+}
+
+.code-area .caret {
+    -fx-stroke: #fdfdfd;
+}
+
+.token-type {
+    -fx-text-fill: #bfbfbf;
+    -fx-font-size: 16px;
+    -fx-font-family: "Lucida Console";
+    -fx-cursor: hand;
+}
+
+.token-type-focus {
+    -fx-text-fill: #d8d8d8;
+    -fx-background-color:  #334155;
+    -fx-padding: 8px;
+    -fx-background-radius: 10;
+}
+
+.menu-button {
+    -fx-background-color: none;
+    -fx-text-fill: #bfbfbf;
+    -fx-font-size: 14px;
+    -fx-font-family: "Lucida Console";
+}
+
+.menu-button-focus {
+    -fx-text-fill: #d8d8d8;
+}
+
+.skyblue-text {
+    -fx-fill: #0284c7;
+}
+
+.white-text {
+    -fx-fill: #f8fafc;
+}
+
+.purple-text {
+    -fx-fill: #9333ea;
+}
+
+.red-text {
+    -fx-fill: #d97706;
+}
+
+.gray-text {
+    -fx-fill: #64748b;
+}
+
+.green-text {
+    -fx-fill: #65a30d;
+}
+
+.default-text {
+    -fx-fill: #cbd5e1;
+}
+
+.error-text {
+    -fx-underline: true;
+    -fx-fill: #cbd5e1;
+}
+
+.tokens-filtered__token, .tokens-filtered__initial {
+    -fx-text-fill: #d8d8d8;
+    -fx-font-size: 14px;
+}
+
+.tokens-filtered__token {
+    -fx-background-color:   #475569;
+    -fx-padding: 8px;
+    -fx-font-size: 12px;
+    -fx-background-radius: 16;
+    -fx-cursor: hand;
+}
