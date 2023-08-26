@@ -22,18 +22,19 @@ import java.util.*;
 public class Parser_py extends Application {
 
     MainController mainController;
-    StyleClassedTextArea codeArea;
+    CodeArea codeArea;
     ArrayList<Token> tokens;
     int codeTextAreaSize;
 
     GraphScene graphScene;
+    ReportsScene reportsScene;
 
     public static void main(String[] args) {
         launch();
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage)  {
 
         tokens = new ArrayList<>();
 
@@ -55,21 +56,55 @@ public class Parser_py extends Application {
             this.graphScene = new GraphScene(rootGraph,tokens);
             this.graphScene.loadTokenTypes();
 
+            FXMLLoader loaderReports = new FXMLLoader(getClass().getResource("Reports.fxml"));
+            Parent rootReports = loaderReports.load();
+            Scene reportsScene = new Scene(rootReports);
+            reportsScene.getStylesheets().add(CSS);
+            this.reportsScene = new ReportsScene(rootReports, tokens);
+
             stage.setScene(mainScene);
             stage.show();
 
             // Handle navigation action (button click)
-            Button switchToGraphSceneButton = (Button) rootMain.lookup("#switchToGraphScene");
-            switchToGraphSceneButton.setOnAction(event -> {
+            Button switchFromMainToGraph = (Button) rootMain.lookup("#switchToGraphScene");
+            switchFromMainToGraph.setOnAction(event -> {
                 stage.setScene(graphScene);
                 this.graphScene.setTokens(tokens);
 
             });
+            Button switchFromMainToReports = (Button) rootMain.lookup("#switchToReportsScene");
+            switchFromMainToReports.setOnAction(event -> {
+                stage.setScene(reportsScene);
+                this.reportsScene.fillTable(tokens);
+            });
+            Button openFile = (Button) rootMain.lookup("#openFile");
+            openFile.setOnAction(event -> {
+                FileOpener fileOpener = new FileOpener();
+                fileOpener.start(stage, codeArea);
+                applyColors();
+            });
 
-            Button switchToMainSceneButton = (Button) rootGraph.lookup("#switchToMainScene");
-            switchToMainSceneButton.setOnAction(event -> {
+
+            Button switchFromGraphToMain = (Button) rootGraph.lookup("#switchToMainScene");
+            switchFromGraphToMain.setOnAction(event -> {
                 stage.setScene(mainScene);
             });
+            Button switchFromGraphToReports = (Button) rootGraph.lookup("#switchToReportsScene");
+            switchFromGraphToReports.setOnAction(event -> {
+                stage.setScene(reportsScene);
+                this.reportsScene.fillTable(tokens);
+            });
+
+            Button switchFromReportsToMain = (Button) rootReports.lookup("#switchToMainScene");
+            switchFromReportsToMain.setOnAction(event -> {
+                stage.setScene(mainScene);
+            });
+            Button switchFromReportsToGraph = (Button) rootReports.lookup("#switchToGraphScene");
+            switchFromReportsToGraph.setOnAction(event -> {
+                stage.setScene(graphScene);
+            });
+
+
 
             addEventListeners();
 

@@ -78,3 +78,9 @@
     -fx-background-radius: 16;
     -fx-cursor: hand;
 }
+
+.title {
+    -fx-text-fill: #f1f5f9;
+    -fx-font-size: 32px;
+    -fx-font-family: "Lucida Console";
+}

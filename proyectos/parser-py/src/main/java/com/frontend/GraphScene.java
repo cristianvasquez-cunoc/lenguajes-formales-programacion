@@ -6,6 +6,7 @@ import com.backend.token.Token;
 import com.backend.token.TokenType;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 
@@ -28,7 +29,7 @@ public class GraphScene {
     public GraphScene( Parent root, ArrayList<Token> tokens) {
         this.root = root;
         this.tokens = tokens;
-        tokensContainer = (FlowPane) root.lookup("#tokensContainer");
+        tokensContainer = (FlowPane)((ScrollPane) root.lookup("#tokensContainerScrollPane")).getContent();
     }
 
     public void showTokensMatching(TokenType tokenType) {

@@ -2,7 +2,7 @@ package com.backend.token;
 
 public class Token {
     TokenType type;
-    // TODO: ask about pattern
+    String pattern;
     String lexeme;
     int line;
     int column;
@@ -13,7 +13,21 @@ public class Token {
         this.lexeme = lexeme;
         this.line = line;
 
+        assignPattern();
+
         column = absColumn - lexeme.length() + 1;
+    }
+
+    public void assignPattern() {
+        if(type.equals(TokenType.IDENTIFIER)) {
+            pattern = "[a-zA-Z_][a-zA-Z0-9_]*";
+        } else if (type.equals(TokenType.CONSTANT)) {
+            pattern = "[a-zA-Z0-9.]";
+        } else if (type.equals(TokenType.COMMENT)) {
+            pattern = "#[a-zA-Z0-9.]*";
+        } else {
+            pattern = lexeme;
+        }
     }
 
     public String toString() {
@@ -35,5 +49,9 @@ public class Token {
 
     public TokenType getType() {
         return type;
+    }
+
+    public String getPattern() {
+        return pattern;
     }
 }
