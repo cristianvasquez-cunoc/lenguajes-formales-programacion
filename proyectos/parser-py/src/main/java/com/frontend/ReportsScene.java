@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
@@ -22,6 +23,7 @@ public class ReportsScene {
     ArrayList<Token> tokens;
     ObservableList<Token> observableTokens;
     TableView<Token> table;
+    TextField filterBar;
 
     public ReportsScene(Parent root, ArrayList<Token> tokens) {
         this.root = root;
@@ -29,7 +31,7 @@ public class ReportsScene {
 
         Label title = new Label("Reportes");
         title.getStyleClass().add("title");
-        title.setPadding(new Insets(16,16,16,16));
+        title.setPadding(new Insets(16, 16, 16, 16));
         vBox = (VBox) root.lookup("#vBox");
 
         vBox.setAlignment(Pos.CENTER);
@@ -58,11 +60,16 @@ public class ReportsScene {
         colCol.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getColumn())));
         colCol.setPrefWidth(140);
 
-
         table.getColumns().setAll(tokenCol, patternCol, lexemeCol, lineCol, colCol);
 
         table.setItems(observableTokens);
 
+        filterBar = new TextField();
+        filterBar.setOnKeyReleased(event -> {
+            printTableFiltered();
+        });
+
+        vBox.getChildren().add(filterBar);
         vBox.getChildren().add(table);
         vBox.setVgrow(table, Priority.ALWAYS);
 
@@ -70,6 +77,26 @@ public class ReportsScene {
 
     public void fillTable(ArrayList<Token> tokens) {
         observableTokens = FXCollections.observableArrayList(tokens);
+        this.tokens = tokens;
         table.setItems(observableTokens);
     }
+
+    public void printTableFiltered() {
+        String text = filterBar.getText();
+        ArrayList<Token> tokensMatching = new ArrayList<>();
+        observableTokens.clear();
+
+        for (int i = 0; i < tokens.size(); i++) {
+            Token tk = tokens.get(i);
+            if (
+                    tk.getType().getValue().contains(text) || tk.getLexeme().contains(text) || String.valueOf(tk.getColumn()).equals(text) || String.valueOf(tk.getLine()).equals(text) || tk.getPattern().contains(text)
+            )
+                tokensMatching.add(tk);
+        }
+
+        observableTokens = FXCollections.observableArrayList(tokensMatching);
+        table.setItems(observableTokens);
+
+    }
+
 }
